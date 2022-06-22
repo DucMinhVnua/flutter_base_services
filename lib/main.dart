@@ -1,7 +1,11 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_base_service/services/rest/app_base_client.dart';
+import 'package:flutter_base_service/services/graphQL/app_base_GraphQL.dart';
+import 'package:flutter_base_service/services/restAPI/app_base_client.dart';
 import 'package:flutter_base_service/utils/app_utils.dart';
-import 'package:flutter_base_service/utils/constants.dart';
+import 'package:flutter_base_service/utils/app_constants.dart';
+import 'package:flutter_base_service/utils/graphQL_query_request.dart';
 
 void main() {
   runApp(const MyApp());
@@ -34,6 +38,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   Constants constants = Constants();
+  String text = 'click';
 
   @override
   Widget build(BuildContext context) {
@@ -44,19 +49,33 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
           child: ElevatedButton(
               onPressed: () async {
-                var deviceID = await AppUtils().getDeviceId();
-                Map<String, String> headers = {
-                  "SiteId": "184",
-                  "DeviceId": deviceID,
-                  'Content-Type': 'application/json',
-                };
-                Map<String, String> payloadObj = {"title": "Hello"};
-                var response = await AppBaseClient()
-                    .get(Constants.BASE_URL, 'posts/1', {});
+                // ========== TEST REST API
+                // var deviceID = await AppUtils().getDeviceId();
+                // Map<String, String> headers = {
+                //   "SiteId": "184",
+                //   "DeviceId": deviceID,
+                //   'Content-Type': 'application/json',
+                // };
+                // Map<String, String> payloadObj = {"title": "Hello"};
+                // var response = await AppBaseClient()
+                //     .get(api: 'posts', headers: headers, context: context);
 
-                var a = 3;
+                // ========== TEST GRAPHQL API
+                var response = await AppBaseGraphQL.callApi(
+                  context: context,
+                  endpoint: 'https://perfect-seasnail-95.hasura.app/v1/graphql',
+                  accessToken: '',
+                  body: queryGetPersons,
+                  variables: {
+                    // "firstname": "update name 10",
+                  },
+                  headers: {
+                    "x-hasura-admin-secret":
+                        "cCy7wDV7WyioGilcndPAYPb4DdgMYQVKG4FH8rIfVN0bs6S4bk426QMIxHIu5aH4"
+                  },
+                );
               },
-              child: Text('Call api'))),
+              child: Text(text))),
     );
   }
 }
