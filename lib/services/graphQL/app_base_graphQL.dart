@@ -14,28 +14,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base_service/services/restAPI/app_exceptions.dart';
 import 'package:flutter_base_service/utils/app_utils.dart';
 import 'package:flutter_base_service/utils/app_constants.dart';
-// import 'package:graphql/client.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
 class AppBaseGraphQL {
-  AppUtils appUtil = new AppUtils();
-  Constants constants = new Constants();
-
   static Future<dynamic> callApi(
-      {required BuildContext context,
-      required String endpoint,
-      String? accessToken,
-      required String body,
+      {required String body,
       Map<String, dynamic>? variables,
       Map<String, String>? headers}) async {
     try {
       bool isConnectionAvailable = await checkInternetConnection();
       if (isConnectionAvailable == true) {
-        final _httpLink = HttpLink(endpoint,
+        final _httpLink = HttpLink(Constants.BASE_ENDPOINT,
             defaultHeaders: {"content-type": "application/json", ...headers!});
 
         final _authLink = AuthLink(
-          getToken: () async => 'Bearer $accessToken',
+          getToken: () async => 'Bearer accessToken',
         );
 
         Link link = _authLink.concat(_httpLink);
@@ -51,14 +44,14 @@ class AppBaseGraphQL {
         );
 
         QueryResult queryResult = await client.query(options);
-
+        AppUtils.showPopup("Thông báo", "show thành công");
         return queryResult;
       } else {
-        AppUtils.showPopup(context, "Thông báo", "Không có kết nối Internet.");
+        AppUtils.showPopup("Thông báo", "Không có kết nối Internet.");
         return "";
       }
     } on Exception catch (e) {
-      AppUtils.showPopup(context, "Exception", e.toString());
+      AppUtils.showPopup("Exception", e.toString());
     }
   }
 

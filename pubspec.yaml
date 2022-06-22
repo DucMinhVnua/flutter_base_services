@@ -33,6 +33,7 @@ dependencies:
   device_info: ^2.0.2
   universal_platform: ^1.0.0+1
   graphql_flutter: ^5.1.0
+  get: ^4.6.5
   # graphql: ^5.1.1
 
   # The following adds the Cupertino Icons font to your application.

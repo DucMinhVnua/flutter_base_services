@@ -1,6 +1,7 @@
 import 'package:device_info/device_info.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:universal_platform/universal_platform.dart';
 
 class AppUtils {
@@ -19,24 +20,13 @@ class AppUtils {
     return identifier;
   }
 
-  static Future<void> showPopup(
-      BuildContext context, String title, String content) async {
-    // flutter defined function
-    await showDialog(
-      context: context,
-      builder: (BuildContext context) => AlertDialog(
-        title: Text(title),
-        content: Text(content),
-        actions: <Widget>[
-          // usually buttons at the bottom of the dialog
-          TextButton(
-            child: const Text('Đóng'),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-        ],
-      ),
+  static Future<void> showPopup(String title, String content) async {
+    Get.defaultDialog(
+      title: title,
+      middleText: content,
+      backgroundColor: Colors.green,
+      titleStyle: TextStyle(color: Colors.white),
+      middleTextStyle: TextStyle(color: Colors.white),
     );
   }
 }
