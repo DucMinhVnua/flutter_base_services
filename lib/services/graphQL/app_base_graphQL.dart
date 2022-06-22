@@ -50,7 +50,7 @@ class AppBaseGraphQL {
           variables: variables!,
         );
 
-        QueryResult queryResult = await (client.query(options));
+        QueryResult queryResult = await client.query(options);
 
         return queryResult;
       } else {
