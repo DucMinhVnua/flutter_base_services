@@ -28,10 +28,10 @@ class AppBaseClient {
           .timeout(Duration(seconds: Constants.TIME_OUT_DURATION));
       return _processResponse(response, context);
     } on SocketException {
-      AppUtils.showPopup(
-          context: context,
-          title: "Thông báo",
-          content: "Không có kết nối internet.");
+      // AppUtils.showPopup(
+      //     context: context,
+      //     title: "Thông báo",
+      //     content: "Không có kết nối internet.");
       throw FetchDataException('Không có kết nối internet.', uri.toString());
     } on TimeoutException {
       // AppUtils.showPopup(context,"Thông báo", "API not responded in time.");
@@ -56,16 +56,16 @@ class AppBaseClient {
           .timeout(Duration(seconds: Constants.TIME_OUT_DURATION));
       return _processResponse(response, context);
     } on SocketException {
-      AppUtils.showPopup(
-          context: context,
-          title: "Thông báo",
-          content: "Không có kết nối internet.");
+      // AppUtils.showPopup(
+      //     context: context,
+      //     title: "Thông báo",
+      //     content: "Không có kết nối internet.");
       throw FetchDataException('Không có kết nối internet.', uri.toString());
     } on TimeoutException {
-      AppUtils.showPopup(
-          context: context,
-          title: "Thông báo",
-          content: "API not responded in time.");
+      // AppUtils.showPopup(
+      //     context: context,
+      //     title: "Thông báo",
+      //     content: "API not responded in time.");
       throw ApiNotRespondingException(
           'API not responded in time.', uri.toString());
     }
@@ -84,16 +84,16 @@ class AppBaseClient {
           .timeout(Duration(seconds: Constants.TIME_OUT_DURATION));
       return _processResponse(response, context);
     } on SocketException {
-      AppUtils.showPopup(
-          context: context,
-          title: "Thông báo",
-          content: "Không có kết nối internet.");
+      // AppUtils.showPopup(
+      //     context: context,
+      //     title: "Thông báo",
+      //     content: "Không có kết nối internet.");
       throw FetchDataException('Không có kết nối internet.', uri.toString());
     } on TimeoutException {
-      AppUtils.showPopup(
-          context: context,
-          title: "Thông báo",
-          content: "API not responded in time.");
+      // AppUtils.showPopup(
+      //     context: context,
+      //     title: "Thông báo",
+      //     content: "API not responded in time.");
       throw ApiNotRespondingException(
           'API not responded in time.', uri.toString());
     }
@@ -114,16 +114,16 @@ class AppBaseClient {
           .timeout(Duration(seconds: Constants.TIME_OUT_DURATION));
       return _processResponse(response, context);
     } on SocketException {
-      AppUtils.showPopup(
-          context: context,
-          title: "Thông báo",
-          content: "Không có kết nối internet.");
+      // AppUtils.showPopup(
+      //     context: context,
+      //     title: "Thông báo",
+      //     content: "Không có kết nối internet.");
       throw FetchDataException('Không có kết nối internet.', uri.toString());
     } on TimeoutException {
-      AppUtils.showPopup(
-          context: context,
-          title: "Thông báo",
-          content: "API not responded in time.");
+      // AppUtils.showPopup(
+      //     context: context,
+      //     title: "Thông báo",
+      //     content: "API not responded in time.");
       throw ApiNotRespondingException(
           'API not responded in time.', uri.toString());
     }
@@ -138,37 +138,37 @@ class AppBaseClient {
         var responseJson = utf8.decode(response.bodyBytes);
         return responseJson;
       case 400:
-        AppUtils.showPopup(
-            context: context,
-            title: "Thông báo",
-            content:
-                "${utf8.decode(response.bodyBytes)} ${response.request!.url.toString()}");
+        // AppUtils.showPopup(
+        //     context: context,
+        //     title: "Thông báo",
+        //     content:
+        //         "${utf8.decode(response.bodyBytes)} ${response.request!.url.toString()}");
         throw BadRequestException(
             utf8.decode(response.bodyBytes), response.request!.url.toString());
       case 401:
       case 403:
-        AppUtils.showPopup(
-            context: context,
-            title: "Thông báo",
-            content:
-                "${utf8.decode(response.bodyBytes)} ${response.request!.url.toString()}");
+        // AppUtils.showPopup(
+        //     context: context,
+        //     title: "Thông báo",
+        //     content:
+        //         "${utf8.decode(response.bodyBytes)} ${response.request!.url.toString()}");
         throw UnAuthorizedException(
             utf8.decode(response.bodyBytes), response.request!.url.toString());
       case 422:
-        AppUtils.showPopup(
-            context: context,
-            title: "Thông báo",
-            content:
-                "${utf8.decode(response.bodyBytes)} ${response.request!.url.toString()}");
+        // AppUtils.showPopup(
+        //     context: context,
+        //     title: "Thông báo",
+        //     content:
+        //         "${utf8.decode(response.bodyBytes)} ${response.request!.url.toString()}");
         throw BadRequestException(
             utf8.decode(response.bodyBytes), response.request!.url.toString());
       case 500:
       default:
-        AppUtils.showPopup(
-            context: context,
-            title: "Thông báo",
-            content:
-                "${utf8.decode(response.bodyBytes)} ${response.request!.url.toString()}");
+        // AppUtils.showPopup(
+        //     context: context,
+        //     title: "Thông báo",
+        //     content:
+        //         "${utf8.decode(response.bodyBytes)} ${response.request!.url.toString()}");
         throw FetchDataException(
             'Error occured with code : ${response.statusCode}',
             response.request!.url.toString());

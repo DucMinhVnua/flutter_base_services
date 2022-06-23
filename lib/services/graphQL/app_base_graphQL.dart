@@ -42,19 +42,19 @@ class AppBaseGraphQL {
         );
 
         QueryResult queryResult = await client.query(options);
-        AppUtils.showPopup(
-            context: context, title: "Thông báo", content: "show thành công");
+        // AppUtils.showPopup(
+        //     context: context, title: "Thông báo", content: "show thành công");
         return queryResult;
       } else {
-        AppUtils.showPopup(
-            context: context,
-            title: "Thông báo",
-            content: "Không có kết nối Internet.");
+        // AppUtils.showPopup(
+        //     context: context,
+        //     title: "Thông báo",
+        //     content: "Không có kết nối Internet.");
         return "";
       }
     } on Exception catch (e) {
-      AppUtils.showPopup(
-          context: context, title: "Exception", content: e.toString());
+      // AppUtils.showPopup(
+      //     context: context, title: "Exception", content: e.toString());
     }
   }
 

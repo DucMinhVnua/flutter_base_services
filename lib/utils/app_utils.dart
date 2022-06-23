@@ -1,6 +1,9 @@
+import 'dart:ui';
+
 import 'package:device_info/device_info.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_base_service/model/button_popup_model.dart';
 import 'package:get/get.dart';
 import 'package:universal_platform/universal_platform.dart';
 
@@ -18,45 +21,5 @@ class AppUtils {
     }
 
     return identifier;
-  }
-
-  // ============================================
-
-  static Future<void> showPopup(
-      {required BuildContext context,
-      required String title,
-      required String content,
-      VoidCallback? onAccept}) async {
-    // flutter defined function
-    await showDialog(
-      context: context,
-      builder: (BuildContext context) => AlertDialog(
-        title: Text(title),
-        content: Text(content),
-        actions: <Widget>[
-          // usually buttons at the bottom of the dialog
-          TextButton(
-            child: const Text('Cancel'),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-
-          TextButton(child: const Text('Accept'), onPressed: onAccept),
-        ],
-      ),
-    );
-  }
-
-  static Future<void> showPopupCustom(
-      {required BuildContext context,
-      required String title,
-      required String content,
-      required Widget child}) async {
-    // flutter defined function
-    await showDialog(
-      context: context,
-      builder: (BuildContext context) => AlertDialog(content: child),
-    );
   }
 }

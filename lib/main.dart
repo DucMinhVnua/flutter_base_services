@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_base_service/dialogs/dialog_custom.dart';
+import 'package:flutter_base_service/model/button_popup_model.dart';
 import 'package:flutter_base_service/services/graphQL/app_base_GraphQL.dart';
 import 'package:flutter_base_service/services/restAPI/app_base_client.dart';
 import 'package:flutter_base_service/utils/app_utils.dart';
@@ -63,29 +65,20 @@ class _MyHomePageState extends State<MyHomePage> {
                 Map<String, String> payloadObj = {"title": "Hello"};
                 var response = jsonDecode(await AppBaseClient()
                     .get(context: context, api: 'posts', headers: headers));
-                await AppUtils.showPopupCustom(
+
+                ShowPopup(
                   context: context,
-                  title: "title",
-                  content: "content",
-                  child: Container(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text("Thông báo"),
-                        Container(child: Text("Content")),
-                        Container(
-                            child: Row(children: [
-                          ElevatedButton(
-                              onPressed: () {
-                                Get.back();
-                              },
-                              child: Text("Cancel")),
-                          ElevatedButton(onPressed: () {}, child: Text("Oke"))
-                        ]))
-                      ],
-                    ),
-                  ),
-                );
+                  content: 'Test content',
+                  title: 'Test title',
+                  buttons: [
+                    ButtonDiaLog(
+                        textButton: "Cancel",
+                        onPressed: () {
+                          Get.back();
+                        }),
+                    ButtonDiaLog(textButton: "Accept", onPressed: () {})
+                  ],
+                ).show();
 
                 // ========== TEST GRAPHQL API
                 // var response = await AppBaseGraphQL.callApi(
