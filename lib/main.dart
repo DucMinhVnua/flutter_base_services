@@ -7,9 +7,10 @@ import 'package:flutter_base_service/services/restAPI/app_base_client.dart';
 import 'package:flutter_base_service/utils/app_utils.dart';
 import 'package:flutter_base_service/utils/app_constants.dart';
 import 'package:flutter_base_service/utils/graphQL_query_request.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 
-void main() {
+void main() async {
   runApp(const MyApp());
 }
 
@@ -60,8 +61,31 @@ class _MyHomePageState extends State<MyHomePage> {
                   'Content-Type': 'application/json',
                 };
                 Map<String, String> payloadObj = {"title": "Hello"};
-                var response = jsonDecode(
-                    await AppBaseClient().get(api: 'posts', headers: headers));
+                var response = jsonDecode(await AppBaseClient()
+                    .get(context: context, api: 'posts', headers: headers));
+                await AppUtils.showPopupCustom(
+                  context: context,
+                  title: "title",
+                  content: "content",
+                  child: Container(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text("Thông báo"),
+                        Container(child: Text("Content")),
+                        Container(
+                            child: Row(children: [
+                          ElevatedButton(
+                              onPressed: () {
+                                Get.back();
+                              },
+                              child: Text("Cancel")),
+                          ElevatedButton(onPressed: () {}, child: Text("Oke"))
+                        ]))
+                      ],
+                    ),
+                  ),
+                );
 
                 // ========== TEST GRAPHQL API
                 // var response = await AppBaseGraphQL.callApi(

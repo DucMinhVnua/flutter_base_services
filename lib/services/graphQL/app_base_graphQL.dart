@@ -1,8 +1,5 @@
 /* 
   define base client GrapghQL (query & mutation)
-  context: Phục vụ cho show popup
-  endpoint: Đường dẫn api
-  accessToken: token nếu có
   body: dữ liệu query or mutation
   variables: dữ liệu cung cấp cho body (nếu có)
   headers: headers (nếu có)
@@ -18,7 +15,8 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 
 class AppBaseGraphQL {
   static Future<dynamic> callApi(
-      {required String body,
+      {required BuildContext context,
+      required String body,
       Map<String, dynamic>? variables,
       Map<String, String>? headers}) async {
     try {
@@ -44,14 +42,19 @@ class AppBaseGraphQL {
         );
 
         QueryResult queryResult = await client.query(options);
-        AppUtils.showPopup("Thông báo", "show thành công");
+        AppUtils.showPopup(
+            context: context, title: "Thông báo", content: "show thành công");
         return queryResult;
       } else {
-        AppUtils.showPopup("Thông báo", "Không có kết nối Internet.");
+        AppUtils.showPopup(
+            context: context,
+            title: "Thông báo",
+            content: "Không có kết nối Internet.");
         return "";
       }
     } on Exception catch (e) {
-      AppUtils.showPopup("Exception", e.toString());
+      AppUtils.showPopup(
+          context: context, title: "Exception", content: e.toString());
     }
   }
 
